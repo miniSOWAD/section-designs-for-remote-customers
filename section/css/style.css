@@ -1,0 +1,212 @@
+:root {
+    --bg-color: #121212;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --font-main: 'Helvetica Neue', Arial, sans-serif;
+    --font-display: 'Impact', 'Arial Black', sans-serif;
+    --cursor-color: #fff; /* Customize the cursor color here */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+}
+
+/* Custom CSS Cursor hidden by default */
+html, body, .featured-works {
+    cursor: none;
+}
+
+/* --- Cursor Followers --- */
+.cursor-dot, .cursor-circle {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%); /* Center on the actual point */
+    visibility: hidden; /* Prevent FOUC before GSAP loads follower */
+}
+
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--cursor-color);
+}
+
+.cursor-circle {
+    width: 35px;
+    height: 35px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* --- Featured Works Section (Pinned) --- */
+.featured-works {
+    padding: 120px 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    visibility: hidden; /* FOUC */
+    width: 100vw;
+    height: 100vh; /* Pinned area takes up full viewport */
+    justify-content: space-between; /* Header top, cards bottom */
+}
+
+.section-header {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.title {
+    font-family: var(--font-display);
+    font-size: 5vw; /* Responsive scaling */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+}
+
+.meta .line {
+    width: 60px;
+    height: 1px;
+    background-color: #333;
+    margin-right: 10px;
+}
+
+/* --- Cards Container (The depth layout) --- */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1600px;
+    height: 60vh;
+    position: relative;
+    padding-bottom: 50px;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    transition: z-index 0.3s;
+}
+
+.image-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #1a1a1a;
+    border-radius: 12px;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform-origin: center;
+}
+
+/* --- Specific Design & Depths --- */
+.center-card {
+    width: 38%;
+    height: 100%;
+    z-index: 5;
+    margin: 0 -5%; /* Overlap side cards */
+}
+
+.center-card .image-wrapper {
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5); /* Added subtle shadow for depth */
+}
+
+.side-card {
+    width: 28%;
+    height: 90%;
+    z-index: 2;
+}
+
+/* Reverting to the slanted cuts via clip-path */
+.left-card {
+    transform: rotate(-1deg); /* Subtle static rotation from screenshot */
+}
+
+.left-card .image-wrapper {
+    clip-path: polygon(0 0, 100% 0, 100% 65%, 0 100%);
+}
+
+.right-card {
+    transform: rotate(1deg);
+}
+
+.right-card .image-wrapper {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 35%);
+}
+
+/* --- Text & Meta Placements --- */
+.card-content {
+    padding-top: 25px;
+    text-align: right;
+    padding-right: 15%;
+    width: 100%;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+}
+
+.card-title {
+    font-size: 1.4vw; /* Responsive size */
+    font-weight: bold;
+}
+
+.card-meta-tags {
+    position: absolute;
+    bottom: -15px; /* Adjust to sit below the slanted mask */
+    right: 3vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+.pagination {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+.pagination strong {
+    color: #fff;
+    font-size: 1.8rem;
+}
+
+.tags {
+    display: flex;
+    gap: 10px;
+}
+
+.tag {
+    padding: 8px 16px;
+    border: 1px solid #333;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
