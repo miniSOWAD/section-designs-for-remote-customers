@@ -349,7 +349,7 @@ function updateCarousel() {
       // 🟦 LEFT CARD: Scaled down, lower-left triangle cut
       gsap.to(card, { xPercent: -75, scale: 0.85, zIndex: 2, opacity: 1, duration: 1.2, ease: 'power3.inOut' });
       // The exact cut from Bottom-Right to Mid-Left
-      gsap.to(imgWrapper, { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 35%)', duration: 1.2, ease: 'power3.inOut' });
+      gsap.to(imgWrapper, { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 0%)', duration: 1.2, ease: 'power3.inOut' });
       gsap.to(leftText, { opacity: 1, delay: 0.4, duration: 0.6 }); // Show Left text in the void
       gsap.to(rightText, { opacity: 0, duration: 0.4 });
 
@@ -357,7 +357,7 @@ function updateCarousel() {
       // 🟧 RIGHT CARD: Scaled down, lower-right triangle cut
       gsap.to(card, { xPercent: 75, scale: 0.85, zIndex: 2, opacity: 1, duration: 1.2, ease: 'power3.inOut' });
       // The exact cut from Mid-Right to Bottom-Left
-      gsap.to(imgWrapper, { clipPath: 'polygon(0% 0%, 100% 0%, 100% 35%, 0% 100%)', duration: 1.2, ease: 'power3.inOut' });
+      gsap.to(imgWrapper, { clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 100%)', duration: 1.2, ease: 'power3.inOut' });
       gsap.to(leftText, { opacity: 0, duration: 0.4 });
       gsap.to(rightText, { opacity: 1, delay: 0.4, duration: 0.6 }); // Show Right text in the void
 
