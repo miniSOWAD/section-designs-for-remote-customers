@@ -50,24 +50,36 @@
     transform: translate(-50%, -50%);
   }
 
+  /* --- Spacer Sections to allow page scrolling --- */
+  .spacer {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
   /* --- Headers --- */
   .featured-section {
     position: relative;
-    padding: 100px 0;
+    padding: 80px 0;
     width: 100vw;
     overflow: hidden; 
   }
 
   .section-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
     position: relative;
     z-index: 10;
   }
 
   .section-title {
     font-family: 'Bebas Neue', 'Impact', sans-serif;
-    font-size: clamp(4rem, 6vw, 6rem);
+    font-size: clamp(3.5rem, 5vw, 5.5rem);
     letter-spacing: 2px;
     line-height: 1;
     text-transform: uppercase;
@@ -79,7 +91,7 @@
     justify-content: center;
     gap: 12px;
     margin-top: 15px;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: var(--muted);
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -95,8 +107,8 @@
   .carousel-container {
     position: relative;
     width: 100vw;
-    height: 60vh;
-    min-height: 450px;
+    height: 55vh;
+    min-height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -105,16 +117,16 @@
   /* --- Base Card Styles --- */
   .card {
     position: absolute;
-    width: 40vw; /* Base width for Center Card */
-    min-width: 450px;
+    /* Reduced width to 32vw so they stay on screen and leave gaps */
+    width: 32vw; 
+    min-width: 320px;
+    max-width: 480px;
     height: 100%;
     cursor: none; 
-    /* Cards start hidden and are revealed by JS */
     opacity: 0;
     visibility: hidden;
   }
 
-  /* The actual image container that gets clipped */
   .card-img-wrapper {
     position: absolute;
     top: 0; left: 0;
@@ -123,7 +135,6 @@
     background: #1a1a1a;
     border-radius: 12px;
     overflow: hidden;
-    /* GSAP will animate the clip-path directly */
   }
 
   .card-img-wrapper img {
@@ -138,75 +149,75 @@
   }
 
   /* --- Text Sitting in the Triangle Voids --- */
-  /* Left Void Text */
+  /* Left Void Text (Scaled down to fit perfectly) */
   .left-content {
     position: absolute;
     bottom: 20px;
-    left: 10px; /* Aligned left inside the void */
+    left: 8%; /* Pushed safely inside the left boundary */
     z-index: 10;
-    opacity: 0; /* JS handles visibility */
+    opacity: 0; 
   }
   .left-subtitle {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--muted);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
   }
   .left-subtitle .dot {
     width: 4px; height: 4px; background: #c8ff00; border-radius: 50%;
   }
   .left-title {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     font-weight: 800;
     line-height: 1.2;
   }
 
-  /* Right Void Text */
+  /* Right Void Text (Scaled down to fit perfectly) */
   .right-content {
     position: absolute;
     bottom: 20px;
-    right: 20px; /* Aligned right inside the void */
+    right: 8%; /* Pushed safely inside the right boundary */
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 15px;
+    gap: 12px;
     z-index: 10;
-    opacity: 0; /* JS handles visibility */
+    opacity: 0; 
   }
   .right-pagination {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     line-height: 1;
     color: var(--text);
   }
   .right-pagination span {
     font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--muted);
   }
   .right-tags {
     display: flex;
-    gap: 10px;
+    gap: 8px;
   }
   .tag {
-    padding: 8px 18px;
+    padding: 6px 14px;
     border: 1px solid rgba(255,255,255,0.15);
     border-radius: 50px;
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     color: var(--muted);
   }
 </style>
 </head>
 <body>
 
-<!-- Custom cursor -->
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
+<div class="spacer">↓ Scroll Down Into Section ↓</div>
+
 <section class="featured-section" id="featuredWorks">
-  
   <div class="section-header">
     <h2 class="section-title">FEATURED WORKS</h2>
     <div class="section-eyebrow">
@@ -215,10 +226,10 @@
     </div>
   </div>
 
-  <!-- JS will inject the assets here -->
   <div class="carousel-container" id="carousel"></div>
-
 </section>
+
+<div class="spacer">↑ Scroll Up Into Section ↑</div>
 
 <script>
 // --- 1. Custom Cursor Logic ---
@@ -275,7 +286,6 @@ const carousel = document.getElementById('carousel');
 const totalItems = assetsFolder.length;
 
 assetsFolder.forEach((asset, index) => {
-  // Format pagination number (e.g., "02/05")
   const pageNum = (index + 1).toString().padStart(2, '0');
   const totalStr = totalItems.toString().padStart(2, '0');
 
@@ -285,13 +295,11 @@ assetsFolder.forEach((asset, index) => {
         <img src="${asset.image}" alt="${asset.title}">
       </div>
       
-      <!-- Text for the Left Void -->
       <div class="left-content">
         <p class="left-subtitle"><span class="dot"></span> ${asset.subtitle}</p>
         <h3 class="left-title">${asset.title}</h3>
       </div>
 
-      <!-- Text for the Right Void -->
       <div class="right-content">
         <div class="right-pagination">${pageNum}<span>/${totalStr}</span></div>
         <div class="right-tags">
@@ -306,7 +314,7 @@ assetsFolder.forEach((asset, index) => {
 
 const cards = document.querySelectorAll('.card');
 
-// Add cursor hover effects to newly created cards
+// Cursor Hover Effects
 cards.forEach(card => {
   card.addEventListener('mouseenter', () => {
     gsap.to(ring, { width: 64, height: 64, borderColor: 'rgba(255,255,255,0.8)', duration: 0.3 });
@@ -318,10 +326,10 @@ cards.forEach(card => {
   });
 });
 
-// --- 4. The Magic GSAP Carousel Logic ---
+// --- 4. GSAP Carousel Logic & Math ---
 let currentIndex = 0;
+let isAnimating = false; 
 
-// Helper to determine relative position (-1 is Left, 0 is Center, 1 is Right)
 function getPosition(index, current) {
   let diff = index - current;
   if (diff < -Math.floor(totalItems / 2)) diff += totalItems;
@@ -329,56 +337,109 @@ function getPosition(index, current) {
   return diff;
 }
 
-function updateCarousel() {
+// Added dynamic animDuration parameter (Fast for scroll, Smooth for Auto)
+function updateCarousel(animDuration = 0.8) {
   cards.forEach((card, i) => {
     const pos = getPosition(i, currentIndex);
     const imgWrapper = card.querySelector('.card-img-wrapper');
     const leftText = card.querySelector('.left-content');
     const rightText = card.querySelector('.right-content');
 
-    // Make the card visible
     gsap.set(card, { visibility: 'visible' });
 
     if (pos === 0) {
-      // 🟩 CENTER CARD: Full size, no cuts
-      gsap.to(card, { xPercent: 0, scale: 1, zIndex: 5, opacity: 1, duration: 1.2, ease: 'power3.inOut' });
-      gsap.to(imgWrapper, { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', duration: 1.2, ease: 'power3.inOut' });
-      gsap.to([leftText, rightText], { opacity: 0, duration: 0.4 }); // Hide all text
+      // 🟩 CENTER CARD
+      gsap.to(card, { xPercent: 0, scale: 1, zIndex: 5, opacity: 1, duration: animDuration, ease: 'power3.inOut' });
+      gsap.to(imgWrapper, { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', duration: animDuration, ease: 'power3.inOut' });
+      gsap.to([leftText, rightText], { opacity: 0, duration: animDuration / 2 }); 
 
     } else if (pos === -1) {
-      // 🟦 LEFT CARD: Scaled down, lower-left triangle cut
-      gsap.to(card, { xPercent: -75, scale: 0.85, zIndex: 2, opacity: 1, duration: 1.2, ease: 'power3.inOut' });
-      // The exact cut from Bottom-Right to Mid-Left
-      gsap.to(imgWrapper, { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 0%)', duration: 1.2, ease: 'power3.inOut' });
-      gsap.to(leftText, { opacity: 1, delay: 0.4, duration: 0.6 }); // Show Left text in the void
-      gsap.to(rightText, { opacity: 0, duration: 0.4 });
+      // 🟦 LEFT CARD: Shifted -105% to create the physical gap
+      gsap.to(card, { xPercent: -105, scale: 0.85, zIndex: 2, opacity: 1, duration: animDuration, ease: 'power3.inOut' });
+      // Sharp cut from 35% to 0% as requested
+      gsap.to(imgWrapper, { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 35%)', duration: animDuration, ease: 'power3.inOut' });
+      gsap.to(leftText, { opacity: 1, delay: animDuration / 3, duration: animDuration / 1.5 }); 
+      gsap.to(rightText, { opacity: 0, duration: animDuration / 2 });
 
     } else if (pos === 1) {
-      // 🟧 RIGHT CARD: Scaled down, lower-right triangle cut
-      gsap.to(card, { xPercent: 75, scale: 0.85, zIndex: 2, opacity: 1, duration: 1.2, ease: 'power3.inOut' });
-      // The exact cut from Mid-Right to Bottom-Left
-      gsap.to(imgWrapper, { clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 100%)', duration: 1.2, ease: 'power3.inOut' });
-      gsap.to(leftText, { opacity: 0, duration: 0.4 });
-      gsap.to(rightText, { opacity: 1, delay: 0.4, duration: 0.6 }); // Show Right text in the void
+      // 🟧 RIGHT CARD: Shifted 105% to create the physical gap
+      gsap.to(card, { xPercent: 105, scale: 0.85, zIndex: 2, opacity: 1, duration: animDuration, ease: 'power3.inOut' });
+      // Sharp cut from 35% to 0% as requested
+      gsap.to(imgWrapper, { clipPath: 'polygon(0% 0%, 100% 0%, 100% 35%, 0% 100%)', duration: animDuration, ease: 'power3.inOut' });
+      gsap.to(leftText, { opacity: 0, duration: animDuration / 2 });
+      gsap.to(rightText, { opacity: 1, delay: animDuration / 3, duration: animDuration / 1.5 }); 
 
     } else if (pos < -1) {
-      // Hidden Far Left
-      gsap.to(card, { xPercent: -120, scale: 0.6, zIndex: 1, opacity: 0, duration: 1.2, ease: 'power3.inOut' });
+      gsap.to(card, { xPercent: -160, scale: 0.6, zIndex: 1, opacity: 0, duration: animDuration, ease: 'power3.inOut' });
     } else if (pos > 1) {
-      // Hidden Far Right
-      gsap.to(card, { xPercent: 120, scale: 0.6, zIndex: 1, opacity: 0, duration: 1.2, ease: 'power3.inOut' });
+      gsap.to(card, { xPercent: 160, scale: 0.6, zIndex: 1, opacity: 0, duration: animDuration, ease: 'power3.inOut' });
     }
   });
 }
 
-// Initial Setup
-updateCarousel();
+// --- 5. Scroll Hijacking & Auto-Play ---
+let autoPlayTimer;
+let isHoveringSection = false;
 
-// Auto-play interval: Transitions automatically every 3.5 seconds
-setInterval(() => {
+// Triggers with variable duration
+function triggerNext(duration) {
+  if (isAnimating) return;
   currentIndex = (currentIndex + 1) % totalItems;
-  updateCarousel();
-}, 3500);
+  updateCarousel(duration);
+  lockAnimation(duration);
+}
+
+function triggerPrev(duration) {
+  if (isAnimating) return;
+  currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+  updateCarousel(duration);
+  lockAnimation(duration);
+}
+
+// Dynamic lock timer based on how fast the animation is
+function lockAnimation(duration) {
+  isAnimating = true;
+  setTimeout(() => isAnimating = false, duration * 1000 + 50); 
+}
+
+function startAutoPlay() {
+  autoPlayTimer = setInterval(() => {
+    triggerNext(0.8); // Slower, smooth transition for autoplay
+  }, 3500);
+}
+
+// Initial Setup
+updateCarousel(0); // instant set
+startAutoPlay();
+
+const section = document.getElementById('featuredWorks');
+
+// Detect hover state to pause autoplay and allow wheel scrolling
+section.addEventListener('mouseenter', () => {
+  isHoveringSection = true;
+  clearInterval(autoPlayTimer); // Pause autoplay
+});
+
+section.addEventListener('mouseleave', () => {
+  isHoveringSection = false;
+  startAutoPlay(); // Resume autoplay
+});
+
+// The Wheel Event Listener
+section.addEventListener('wheel', (e) => {
+  // ONLY hijack the scroll if we are actively hovering inside the section
+  if (!isHoveringSection) return;
+
+  // Prevent page from scrolling vertically while we transition photos
+  e.preventDefault(); 
+  
+  // Transition FAST (0.3s) when manually scrolling
+  if (e.deltaY > 20) {
+    triggerNext(0.3); 
+  } else if (e.deltaY < -20) {
+    triggerPrev(0.3);
+  }
+}, { passive: false });
 
 </script>
 </body>
