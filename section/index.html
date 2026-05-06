@@ -756,108 +756,49 @@ carousel.addEventListener('wheel', (e) => {
 
 // --- Section 2: Strong Brand Solution Animations ---
 
-// --- Section 2: Strong Brand Solution Animations ---
+// --- Section 2 Animations ---
 
-// 1. Staggered Character Splitting for "STRONG BRAND SOLUTION"
+// Split Header Title
 const sectionTitle = document.getElementById('splitSectionTitle');
 const titleText = sectionTitle.textContent;
 sectionTitle.innerHTML = titleText.split('').map(char => {
   return char === ' ' ? ' ' : `<span class="char-wrap"><span class="char">${char}</span></span>`;
 }).join('');
 
-// 2. Text Splitting Logic for the Heading
+// Split Right Heading
 const heading = document.getElementById('splitHeading');
 const headingWords = heading.innerHTML.split('<br>').map(line => {
   return line.split(' ').map(word => `<span class="word-wrap"><span class="word">${word}</span></span>`).join(' ');
 }).join('<br>');
 heading.innerHTML = headingWords;
 
-// 3. Main ScrollTrigger Timeline for Section 2
+// Setup ScrollTrigger
 const tlSection2 = gsap.timeline({
   scrollTrigger: {
     trigger: "#brandSolution",
-    start: "top 75%", // Triggers when section is 25% into the viewport
+    start: "top 75%", 
     toggleActions: "play none none reverse"
   }
 });
 
-// A. Reveal Sub-Header Info
-tlSection2.from(".solution-header-info", {
-  y: 30,
-  opacity: 0,
-  duration: 0.8,
-  ease: "power3.out"
-}, 0);
+// Animations
+tlSection2.from(".solution-header", { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" }, 0);
 
-// B. Clip-Path Image Reveal (Corrected geometry)
-tlSection2.to(".main-image-wrapper", {
-  clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-  duration: 1.2,
-  ease: "power4.inOut"
-}, 0.2);
+tlSection2.to(".char", { y: "0%", duration: 0.7, stagger: 0.03, ease: "power3.out" }, 0.2);
 
-tlSection2.to(".main-image", {
-  scale: 1,
-  duration: 1.2,
-  ease: "power4.inOut"
-}, 0.2);
+tlSection2.to(".main-image-wrapper", { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 1.2, ease: "power4.inOut" }, 0.4);
 
-// C. Pagination Fade up
-tlSection2.from(".solution-pagination", {
-  y: 20,
-  opacity: 0,
-  duration: 0.8,
-  ease: "power2.out"
-}, 0.6);
+tlSection2.from(".solution-pagination", { x: -20, opacity: 0, duration: 0.8, ease: "power2.out" }, 0.8);
 
-// D. Character reveal for Section Title
-tlSection2.to(".char", {
-  y: "0%",
-  duration: 0.7,
-  stagger: 0.03,
-  ease: "power3.out"
-}, 0.3);
+tlSection2.to(".word", { y: "0%", duration: 0.8, stagger: 0.05, ease: "power3.out" }, 0.6);
 
-// E. Right Content Block Revealk (Words stagger)
-tlSection2.to(".word", {
-  y: "0%",
-  duration: 0.8,
-  stagger: 0.05,
-  ease: "power3.out"
-}, 0.5);
+tlSection2.from(".content-desc", { y: 20, opacity: 0, duration: 0.8, ease: "power2.out" }, 0.8);
 
-tlSection2.from(".content-desc", {
-  y: 20,
-  opacity: 0,
-  duration: 0.8,
-  ease: "power2.out"
-}, 0.7);
+tlSection2.from(".pill-tag", { scale: 0.8, opacity: 0, duration: 0.6, stagger: 0.08, ease: "back.out(1.5)" }, 1.0);
 
-// F. Pop-in Tags
-tlSection2.from(".pill-tag", {
-  scale: 0.5,
-  opacity: 0,
-  duration: 0.6,
-  stagger: 0.08,
-  ease: "back.out(1.7)"
-}, 0.9);
+tlSection2.from(".cta-group", { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" }, 1.2);
 
-// G. Small Images Fade & Scale staggered
-tlSection2.from(".sub-image-wrapper", {
-  scale: 0.8,
-  opacity: 0,
-  duration: 0.8,
-  stagger: 0.15,
-  ease: "power3.out"
-}, 1.0);
-
-// H. Button Bounce in
-tlSection2.from(".btn-outline", {
-  y: 20,
-  opacity: 0,
-  duration: 0.6,
-  ease: "back.out(2)"
-}, 1.2);
+tlSection2.from(".sub-image-wrapper", { scale: 0.8, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power3.out" }, 1.1);
 
 // Add custom cursor hover state to new buttons
 document.querySelectorAll('.btn-primary, .btn-outline').forEach(btn => {
