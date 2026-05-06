@@ -211,20 +211,26 @@
   /*section 2*******************************************/
   /* ── Section 2: Brand Solution ─────────────────────────────────── */
   /* ── Section 2: Brand Solution ─────────────────────────────────── */
+  /* ── Section 2: Brand Solution ─────────────────────────────────── */
   .brand-solution {
     position: relative;
     padding: 120px 5vw;
     width: 100vw;
     background: var(--bg);
     color: var(--text);
+    /* Border on outer container like Image 2 */
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 24px;
+    margin: 50px 0;
   }
 
-  /* Header Row (Removed full-width line) */
-  .solution-header {
+  /* Header Row (Above columns and centered title) */
+  .solution-header-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 80px;
+    margin-bottom: 20px;
+    padding: 0 5%;
   }
 
   .header-left {
@@ -243,24 +249,41 @@
   }
 
   .eyebrow-accent-line {
-    width: 60px; /* Short line only under text */
+    width: 100%; /* Fully under 'WHAT WE OFFER' as seen in design */
     height: 2px;
-    background: #c8ff00; 
-  }
-
-  .header-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3.5rem, 5vw, 5.5rem);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-align: center;
-    flex: 1;
+    background: #c8ff00; /* Vibrant green */
   }
 
   .header-right {
     width: 25%;
     display: flex;
     justify-content: flex-end;
+  }
+
+  /* Main Section Title (Centered) */
+  .main-section-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .header-title {
+    font-family: 'Bebas Neue', 'Impact', sans-serif;
+    font-size: clamp(3.5rem, 5vw, 5.5rem);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+
+  /* Split title setup */
+  .char-wrap {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+  }
+  .char {
+    display: inline-block;
+    transform: translateY(100%);
   }
 
   /* Buttons */
@@ -323,19 +346,21 @@
   /* Main Grid Layout */
   .solution-grid {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: 0.9fr 1.1fr;
     gap: 4vw;
+    align-items: stretch;
   }
 
-  /* Left Column: Image & Pagination */
+  /* Left Column: Image */
   .solution-left {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 3vw; /* Perfect, stable gap between image and number */
+    gap: 20px;
   }
 
   .main-image-wrapper {
-    flex: 1; /* Takes up remaining space gracefully */
+    width: 100%;
     aspect-ratio: 1 / 1;
     border-radius: 24px;
     overflow: hidden;
@@ -362,23 +387,25 @@
   .solution-right {
     display: flex;
     flex-direction: column;
+    gap: 40px;
+    padding-left: 30px;
     justify-content: space-between;
   }
 
   .content-top {
     display: flex;
     flex-direction: column;
-    align-items: flex-end; /* Strictly right-aligned block */
-    text-align: right;     /* Strictly right-aligned text */
+    align-items: flex-start;
+    text-align: left;
     gap: 15px;
-    margin-bottom: 40px;
   }
 
   .content-heading {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3rem, 4vw, 4.5rem);
+    font-size: clamp(2.5rem, 4vw, 4rem);
     line-height: 1.1;
     letter-spacing: 1px;
+    text-transform: uppercase;
   }
   
   .word-wrap { display: inline-block; overflow: hidden; vertical-align: top; }
@@ -388,7 +415,7 @@
     font-size: 0.95rem;
     color: var(--muted);
     line-height: 1.6;
-    max-width: 85%; /* Keeps it readable but locked to the right */
+    max-width: 90%;
   }
 
   /* Bottom Content Sub-grid */
@@ -411,7 +438,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    max-width: 350px; /* Forces them to wrap like the design */
+    max-width: 350px; /* Forces wrapping like Image 2 */
   }
 
   .pill-tag {
@@ -429,7 +456,7 @@
   }
 
   .sub-image-wrapper {
-    width: 140px; /* Fixed sizing to match design */
+    width: 140px; /* Specific sizing to match layout */
     height: 140px;
     border-radius: 12px;
     overflow: hidden;
@@ -466,13 +493,10 @@
 <!-- ══════════════ SECTION 2: STRONG BRAND SOLUTION ══════════════ -->
 <section class="brand-solution" id="brandSolution">
   
-  <!-- Top Header Row -->
-  <div class="solution-header">
+  <div class="solution-header-info">
     <div class="header-left">
       <span class="eyebrow-text">WHAT WE OFFER</span>
-      <div class="eyebrow-accent-line"></div>
-    </div>
-    <h2 class="header-title">STRONG BRAND SOLUTION</h2>
+      <div class="eyebrow-accent-line"></div> </div>
     <div class="header-right">
       <button class="btn-primary">
         View All Services 
@@ -481,10 +505,12 @@
     </div>
   </div>
 
-  <!-- Main Grid Layout -->
+  <div class="main-section-title">
+    <h2 class="header-title" id="splitSectionTitle">STRONG BRAND SOLUTION</h2>
+  </div>
+
   <div class="solution-grid">
     
-    <!-- Left Side: Image + Pagination (Now side-by-side naturally) -->
     <div class="solution-left">
       <div class="main-image-wrapper">
         <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop" alt="Blooming Mockup" class="main-image">
@@ -494,19 +520,15 @@
       </div>
     </div>
 
-    <!-- Right Side: Content Block -->
     <div class="solution-right">
       
-      <!-- Top Content: Right-Aligned Text -->
       <div class="content-top">
         <h3 class="content-heading" id="splitHeading">BRAND STRATEGY &<br>POSITIONING</h3>
         <p class="content-desc">We create human-centered digital experiences that are beautiful, intuitive, and conversion-focused. Every interaction is designed to feel natural and purposeful.</p>
       </div>
 
-      <!-- Bottom Content: Tags, Button, and Small Images -->
       <div class="content-bottom">
         
-        <!-- Tags & CTA Button -->
         <div class="tags-and-cta">
           <div class="tags-grid">
             <span class="pill-tag">Brand Strategy</span>
@@ -522,10 +544,9 @@
           </button>
         </div>
 
-        <!-- Small Images -->
         <div class="small-images-wrapper">
           <div class="sub-image-wrapper">
-            <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=500&auto=format&fit=crop" alt="Aimex Billboard">
+             <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=500&auto=format&fit=crop" alt="Aimex Billboard">
           </div>
           <div class="sub-image-wrapper">
             <img src="https://images.unsplash.com/photo-1606168094336-48f0814a93dc?q=80&w=500&auto=format&fit=crop" alt="Shopping Bags">
