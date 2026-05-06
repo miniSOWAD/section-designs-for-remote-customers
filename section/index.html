@@ -207,6 +207,251 @@
     color: var(--muted);
     white-space: nowrap;
   }
+
+  /*section 2*******************************************/
+  /* ── Section 2: Brand Solution ─────────────────────────────────── */
+  .brand-solution {
+    position: relative;
+    padding: 120px 5vw;
+    width: 100vw;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  /* Header Row */
+  .solution-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 20px;
+  }
+
+  .header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 20%;
+  }
+
+  .eyebrow-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .eyebrow-accent-line {
+    width: 100%;
+    height: 2px;
+    background: #c8ff00; /* Vibrant green */
+  }
+
+  .header-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    flex: 1;
+  }
+
+  .header-right {
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* Buttons */
+  .btn-primary, .btn-outline {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 8px 8px 24px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: none; /* Let custom cursor handle it */
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background: #c8ff00;
+    color: #121212;
+    border: none;
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 6px 6px 6px 20px;
+  }
+
+  .btn-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    color: #121212;
+    border-radius: 50%;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .btn-outline .btn-icon {
+    background: #c8ff00;
+  }
+
+  .btn-primary:hover, .btn-outline:hover {
+    transform: scale(1.05);
+  }
+
+  /* Pulse Animation for CTA */
+  @keyframes pulseGreen {
+    0% { box-shadow: 0 0 0 0 rgba(200, 255, 0, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(200, 255, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(200, 255, 0, 0); }
+  }
+  .pulse-icon {
+    animation: pulseGreen 2s infinite;
+  }
+
+  /* Main Grid Layout */
+  .solution-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+  }
+
+  /* Left Column: Image */
+  .solution-left {
+    position: relative;
+  }
+
+  .main-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 24px;
+    overflow: hidden;
+    /* Initial state for clip-path animation */
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  }
+
+  .main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.2); /* Initial state for smooth scale reveal */
+  }
+
+  .solution-pagination {
+    position: absolute;
+    top: 50%;
+    right: -60px; /* Overlaps into the right column */
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    display: flex;
+    align-items: baseline;
+    z-index: 5;
+  }
+
+  .big-num { font-size: 3.5rem; line-height: 1; }
+  .small-num { font-size: 1rem; font-family: 'DM Sans', sans-serif; color: var(--muted); margin-left: 5px; }
+
+  /* Right Column: Content */
+  .solution-right {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    padding-left: 40px;
+  }
+
+  .content-top {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .content-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: 1px;
+    /* Setup for text splitting */
+    overflow: hidden; 
+  }
+  
+  .word-wrap {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
+  .word {
+    display: inline-block;
+    transform: translateY(100%);
+  }
+
+  .content-desc {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 90%;
+  }
+
+  /* Bottom Content Sub-grid */
+  .content-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: end;
+  }
+
+  .bottom-left-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .tags-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .pill-tag {
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.15);
+    font-size: 0.75rem;
+    color: #ccc;
+    background: transparent;
+  }
+
+  .bottom-right-col {
+    display: flex;
+    gap: 15px;
+  }
+
+  .sub-image-wrapper {
+    width: 50%;
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .sub-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 </style>
 </head>
 <body>
@@ -227,6 +472,82 @@
 
   <!-- Note: We bind the hover and scroll events specifically to THIS container now -->
   <div class="carousel-container" id="carousel"></div>
+</section>
+
+<!-- ══════════════ SECTION 2: STRONG BRAND SOLUTION ══════════════ -->
+<section class="brand-solution" id="brandSolution">
+  
+  <!-- Top Header Row -->
+  <div class="solution-header">
+    <div class="header-left">
+      <span class="eyebrow-text">WHAT WE OFFER</span>
+      <div class="eyebrow-accent-line"></div>
+    </div>
+    <h2 class="header-title">STRONG BRAND SOLUTION</h2>
+    <div class="header-right">
+      <button class="btn-primary">
+        View All Services 
+        <span class="btn-icon">↗</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Grid Layout -->
+  <div class="solution-grid">
+    
+    <!-- Left: Image Block -->
+    <div class="solution-left">
+      <div class="main-image-wrapper">
+        <!-- Orange abstract mockup placeholder -->
+        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop" alt="Blooming Mockup" class="main-image">
+      </div>
+      <!-- Center Pagination Indicator -->
+      <div class="solution-pagination">
+        <span class="big-num">04</span><span class="small-num">/01</span>
+      </div>
+    </div>
+
+    <!-- Right: Content Block -->
+    <div class="solution-right">
+      
+      <!-- Top Content: Text -->
+      <div class="content-top">
+        <h3 class="content-heading" id="splitHeading">BRAND STRATEGY &<br>POSITIONING</h3>
+        <p class="content-desc">We create human-centered digital experiences that are beautiful, intuitive, and conversion-focused. Every interaction is designed to feel natural and purposeful.</p>
+      </div>
+
+      <!-- Bottom Content: Tags, CTA, and Small Images -->
+      <div class="content-bottom">
+        
+        <div class="bottom-left-col">
+          <div class="tags-grid">
+            <span class="pill-tag">Brand Strategy</span>
+            <span class="pill-tag">Positioning</span>
+            <span class="pill-tag">Logo</span>
+            <span class="pill-tag">Visual Direction</span>
+            <span class="pill-tag">Brand Guidelines</span>
+          </div>
+          
+          <button class="btn-outline">
+            View Services
+            <span class="btn-icon pulse-icon">↗</span>
+          </button>
+        </div>
+
+        <div class="bottom-right-col">
+          <div class="sub-image-wrapper">
+             <!-- Red billboard placeholder -->
+            <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=500&auto=format&fit=crop" alt="Aimex Billboard">
+          </div>
+          <div class="sub-image-wrapper">
+            <!-- Shopping bags placeholder -->
+            <img src="https://images.unsplash.com/photo-1606168094336-48f0814a93dc?q=80&w=500&auto=format&fit=crop" alt="Shopping Bags">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </section>
 
 <div class="spacer">↑ Scroll Up Into Section ↑</div>
