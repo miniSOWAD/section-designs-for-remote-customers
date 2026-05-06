@@ -257,8 +257,8 @@
   }
 
   .eyebrow-accent-line {
-    width: 100%; /* Perfectly matches the width of "WHAT WE OFFER" */
-    height: 2px;
+    width: 290px; /* Perfectly matches the width of "WHAT WE OFFER" */
+    height: 1px;
     background: #c8ff00; 
   }
 
@@ -266,7 +266,8 @@
     flex: 1; /* Stretches across the rest of the screen */
     height: 1px;
     background: rgba(255, 255, 255, 0.15);
-    margin-bottom: 1px; /* Visually aligns it with the 2px green line */
+    margin-bottom: 0px;
+    margin-left: -14px; /* Visually aligns it with the 2px green line */
   }
 
   /* --- New Main Title & Button Layout --- */
@@ -275,12 +276,13 @@
     justify-content: space-between; /* Puts Title on left, Button on right */
     align-items: center;
     margin-bottom: 60px;
+    padding-left: 140px; /* Small padding to prevent flush left on mobile */
   }
 
   .header-title {
     font-family: 'Bebas Neue', 'Impact', sans-serif;
     font-size: clamp(3rem, 5vw, 5rem);
-    letter-spacing: 1.5px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
     margin: 0;
   }
