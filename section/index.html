@@ -210,6 +210,7 @@
 
   /*section 2*******************************************/
   /* ── Section 2: Brand Solution ─────────────────────────────────── */
+  /* ── Section 2: Brand Solution ─────────────────────────────────── */
   .brand-solution {
     position: relative;
     padding: 120px 5vw;
@@ -218,21 +219,19 @@
     color: var(--text);
   }
 
-  /* Header Row */
+  /* Header Row (Removed full-width line) */
   .solution-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 60px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 20px;
+    margin-bottom: 80px;
   }
 
   .header-left {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    width: 20%;
+    width: 25%;
   }
 
   .eyebrow-text {
@@ -240,17 +239,18 @@
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 1px;
+    text-transform: uppercase;
   }
 
   .eyebrow-accent-line {
-    width: 100%;
+    width: 60px; /* Short line only under text */
     height: 2px;
-    background: #c8ff00; /* Vibrant green */
+    background: #c8ff00; 
   }
 
   .header-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3rem, 5vw, 5rem);
+    font-size: clamp(3.5rem, 5vw, 5.5rem);
     letter-spacing: 2px;
     text-transform: uppercase;
     text-align: center;
@@ -258,7 +258,7 @@
   }
 
   .header-right {
-    width: 20%;
+    width: 25%;
     display: flex;
     justify-content: flex-end;
   }
@@ -273,7 +273,7 @@
     font-family: 'DM Sans', sans-serif;
     font-size: 0.85rem;
     font-weight: 700;
-    cursor: none; /* Let custom cursor handle it */
+    cursor: none; 
     transition: all 0.3s ease;
   }
 
@@ -311,7 +311,6 @@
     transform: scale(1.05);
   }
 
-  /* Pulse Animation for CTA */
   @keyframes pulseGreen {
     0% { box-shadow: 0 0 0 0 rgba(200, 255, 0, 0.7); }
     70% { box-shadow: 0 0 0 10px rgba(200, 255, 0, 0); }
@@ -324,23 +323,22 @@
   /* Main Grid Layout */
   .solution-grid {
     display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: 60px;
-    align-items: center;
-    position: relative;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4vw;
   }
 
-  /* Left Column: Image */
+  /* Left Column: Image & Pagination */
   .solution-left {
-    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 3vw; /* Perfect, stable gap between image and number */
   }
 
   .main-image-wrapper {
-    width: 100%;
+    flex: 1; /* Takes up remaining space gracefully */
     aspect-ratio: 1 / 1;
     border-radius: 24px;
     overflow: hidden;
-    /* Initial state for clip-path animation */
     clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
   }
 
@@ -348,18 +346,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: scale(1.2); /* Initial state for smooth scale reveal */
+    transform: scale(1.2); 
   }
 
   .solution-pagination {
-    position: absolute;
-    top: 50%;
-    right: -60px; /* Overlaps into the right column */
-    transform: translateY(-50%);
     font-family: 'Bebas Neue', sans-serif;
     display: flex;
     align-items: baseline;
-    z-index: 5;
   }
 
   .big-num { font-size: 3.5rem; line-height: 1; }
@@ -369,61 +362,56 @@
   .solution-right {
     display: flex;
     flex-direction: column;
-    gap: 60px;
-    padding-left: 40px;
+    justify-content: space-between;
   }
 
   .content-top {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: flex-end; /* Strictly right-aligned block */
+    text-align: right;     /* Strictly right-aligned text */
+    gap: 15px;
+    margin-bottom: 40px;
   }
 
   .content-heading {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-size: clamp(3rem, 4vw, 4.5rem);
     line-height: 1.1;
     letter-spacing: 1px;
-    /* Setup for text splitting */
-    overflow: hidden; 
   }
   
-  .word-wrap {
-    display: inline-block;
-    overflow: hidden;
-    vertical-align: top;
-  }
-  .word {
-    display: inline-block;
-    transform: translateY(100%);
-  }
+  .word-wrap { display: inline-block; overflow: hidden; vertical-align: top; }
+  .word { display: inline-block; transform: translateY(100%); }
 
   .content-desc {
     font-size: 0.95rem;
     color: var(--muted);
     line-height: 1.6;
-    max-width: 90%;
+    max-width: 85%; /* Keeps it readable but locked to the right */
   }
 
   /* Bottom Content Sub-grid */
   .content-bottom {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: end;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
   }
 
-  .bottom-left-col {
+  .tags-and-cta {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 40px;
+    gap: 30px;
+    flex: 1;
   }
 
   .tags-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
+    max-width: 350px; /* Forces them to wrap like the design */
   }
 
   .pill-tag {
@@ -435,15 +423,15 @@
     background: transparent;
   }
 
-  .bottom-right-col {
+  .small-images-wrapper {
     display: flex;
     gap: 15px;
   }
 
   .sub-image-wrapper {
-    width: 50%;
-    aspect-ratio: 1 / 1;
-    border-radius: 16px;
+    width: 140px; /* Fixed sizing to match design */
+    height: 140px;
+    border-radius: 12px;
     overflow: hidden;
   }
 
@@ -475,6 +463,7 @@
 </section>
 
 <!-- ══════════════ SECTION 2: STRONG BRAND SOLUTION ══════════════ -->
+<!-- ══════════════ SECTION 2: STRONG BRAND SOLUTION ══════════════ -->
 <section class="brand-solution" id="brandSolution">
   
   <!-- Top Header Row -->
@@ -495,31 +484,30 @@
   <!-- Main Grid Layout -->
   <div class="solution-grid">
     
-    <!-- Left: Image Block -->
+    <!-- Left Side: Image + Pagination (Now side-by-side naturally) -->
     <div class="solution-left">
       <div class="main-image-wrapper">
-        <!-- Orange abstract mockup placeholder -->
         <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop" alt="Blooming Mockup" class="main-image">
       </div>
-      <!-- Center Pagination Indicator -->
       <div class="solution-pagination">
         <span class="big-num">04</span><span class="small-num">/01</span>
       </div>
     </div>
 
-    <!-- Right: Content Block -->
+    <!-- Right Side: Content Block -->
     <div class="solution-right">
       
-      <!-- Top Content: Text -->
+      <!-- Top Content: Right-Aligned Text -->
       <div class="content-top">
         <h3 class="content-heading" id="splitHeading">BRAND STRATEGY &<br>POSITIONING</h3>
         <p class="content-desc">We create human-centered digital experiences that are beautiful, intuitive, and conversion-focused. Every interaction is designed to feel natural and purposeful.</p>
       </div>
 
-      <!-- Bottom Content: Tags, CTA, and Small Images -->
+      <!-- Bottom Content: Tags, Button, and Small Images -->
       <div class="content-bottom">
         
-        <div class="bottom-left-col">
+        <!-- Tags & CTA Button -->
+        <div class="tags-and-cta">
           <div class="tags-grid">
             <span class="pill-tag">Brand Strategy</span>
             <span class="pill-tag">Positioning</span>
@@ -534,13 +522,12 @@
           </button>
         </div>
 
-        <div class="bottom-right-col">
+        <!-- Small Images -->
+        <div class="small-images-wrapper">
           <div class="sub-image-wrapper">
-             <!-- Red billboard placeholder -->
             <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=500&auto=format&fit=crop" alt="Aimex Billboard">
           </div>
           <div class="sub-image-wrapper">
-            <!-- Shopping bags placeholder -->
             <img src="https://images.unsplash.com/photo-1606168094336-48f0814a93dc?q=80&w=500&auto=format&fit=crop" alt="Shopping Bags">
           </div>
         </div>
