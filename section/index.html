@@ -677,6 +677,34 @@ cards.forEach(card => {
   });
 });
 
+// ── Section 1 Title: Masked Wave Reveal ───────────────────
+const titleEl = document.querySelector('.section-title');
+if (titleEl) {
+  const rawText = titleEl.textContent;
+  titleEl.innerHTML = rawText.split('').map(char => {
+    // We force inline styles here to guarantee the mask works perfectly
+    return char === ' ' 
+      ? '&nbsp;' 
+      : `<span class="char-wrap" style="display: inline-block; overflow: hidden; vertical-align: bottom;"><span class="char-s1" style="display: inline-block;">${char}</span></span>`;
+  }).join('');
+}
+
+// The exact same fromTo logic used in Section 2
+gsap.fromTo('.char-s1', 
+  { y: "110%" }, 
+  { 
+    y: "0%", 
+    duration: 0.8, 
+    stagger: 0.03, 
+    ease: "expo.out",
+    scrollTrigger: {
+      trigger: '#featuredWorks',
+      start: 'top 80%', // Triggers as soon as it enters the view
+      toggleActions: "play none none reverse"
+    }
+  }
+);
+
 // --- 4. GSAP Carousel Logic & Math ---
 let currentIndex = 0;
 let isAnimating = false; 
