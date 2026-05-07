@@ -260,6 +260,7 @@
     width: 290px; /* Perfectly matches the width of "WHAT WE OFFER" */
     height: 1px;
     background: #c8ff00; 
+    transform-origin: left center;
   }
 
   .long-faint-line {
@@ -268,6 +269,7 @@
     background: rgba(255, 255, 255, 0.15);
     margin-bottom: 0px;
     margin-left: -14px; /* Visually aligns it with the 2px green line */
+    transform-origin: left center;
   }
 
   /* --- New Main Title & Button Layout --- */
@@ -806,6 +808,11 @@ const headingWords = heading.innerHTML.split('<br>').map(line => {
 }).join('<br>');
 heading.innerHTML = headingWords;
 
+// Set initial states for the cool header reveal
+gsap.set(".eyebrow-accent-line, .long-faint-line", { scaleX: 0 });
+gsap.set(".eyebrow-text", { opacity: 0, y: -15 });
+gsap.set(".btn-solid-green", { opacity: 0, x: 40 });
+
 // Setup ScrollTrigger
 const tlSection2 = gsap.timeline({
   scrollTrigger: {
@@ -814,6 +821,44 @@ const tlSection2 = gsap.timeline({
     toggleActions: "play none none reverse"
   }
 });
+
+// ── THE COOL HEADER ANIMATION SEQUENCE ──
+
+// 1. Draw the Green Line
+tlSection2.to(".eyebrow-accent-line", {
+  scaleX: 1, 
+  duration: 0.4, 
+  ease: "power3.out"
+}, 0);
+
+// 2. Shoot the grey line across & drop "WHAT WE OFFER" in
+tlSection2.to(".long-faint-line", {
+  scaleX: 1, 
+  duration: 0.8, 
+  ease: "power3.inOut"
+}, 0.2)
+.to(".eyebrow-text", {
+  opacity: 1, 
+  y: 0, 
+  duration: 0.5, 
+  ease: "power2.out"
+}, 0.2);
+
+// 3. The Masked Emergence of the Main Title
+tlSection2.to(".char", { 
+  y: "0%", 
+  duration: 0.8, 
+  stagger: 0.04, 
+  ease: "expo.out" 
+}, 0.3);
+
+// 4. Elastic slide-in for the Button
+tlSection2.to(".btn-solid-green", {
+  opacity: 1, 
+  x: 0, 
+  duration: 0.8, 
+  ease: "back.out(1.5)"
+}, 0.5);
 
 // Animations
 tlSection2.from(".solution-header", { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" }, 0);
