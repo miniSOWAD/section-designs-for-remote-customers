@@ -372,9 +372,10 @@
   }
 
   .main-image-wrapper {
-    width: 320px; /* Fixed, smaller size as requested */
-    height: 320px; /* Force it to be a perfect square */
-    flex-shrink: 0; /* Prevents it from getting squished */
+    width: 35vw;       /* Takes up 35% of the screen width */
+    max-width: 550px;  /* But stops growing at 550px */
+    aspect-ratio: 1/1; /* Automatically keeps it a perfect square! */
+    flex-shrink: 0; 
     border-radius: 20px;
     overflow: hidden;
     clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
@@ -397,6 +398,7 @@
     font-family: 'Bebas Neue', sans-serif;
     display: flex;
     align-items: baseline;
+    margin-bottom: -80px;
   }
 
   .big-num { font-size: 3.5rem; line-height: 1; }
@@ -448,6 +450,7 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+    margin-top: 300px;
   }
 
   .tags-grid {
@@ -566,7 +569,7 @@
             <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=500&auto=format&fit=crop" alt="Aimex Billboard">
           </div>
           <div class="sub-image-wrapper">
-            <img src="https://images.unsplash.com/photo-1606168094336-48f0814a93dc?q=80&w=500&auto=format&fit=crop" alt="Shopping Bags">
+            <img src="https://img-0.journaldunet.com/cYYkJk7_GlOsXwDiTyD8qpBTS-M=/1500x/smart/21c5c394bfae40f185494f2becd98263/ccmcms-jdn/39509505.jpeg" alt="Shopping Bags">
           </div>
         </div>
       </div>
