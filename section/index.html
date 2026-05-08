@@ -1189,14 +1189,22 @@ tlCta.from(".btn-green-pill, .btn-white-circle", {
 }, 1.0);
 
 // F. Floating Images pop in organically
-tlCta.from(".floating-img", {
-  scale: 0,
-  opacity: 0,
-  rotation: () => gsap.utils.random(-15, 15), // Slight random starting tilt
-  duration: 1,
-  stagger: 0.15,
-  ease: "back.out(1.5)"
-}, 0.7);
+tlCta.from(".floating-img", 
+  {
+    scale: 0,
+    opacity: 0,
+    rotation: () => gsap.utils.random(-15, 15)
+  }, // Slight random starting tilt
+  {
+    scale: 1,
+    opacity: 1, // Forces it to become fully visible!
+    rotation: 0,
+    duration: 1,
+    stagger: 0.15,
+    ease: "back.out(1.5)"
+  }, 
+  0.7
+);
 
 // 3. Continuous Parallax & Floating Loops (Runs independently)
 
