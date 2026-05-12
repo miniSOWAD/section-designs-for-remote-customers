@@ -5,7 +5,7 @@
 ---
 
 ### 🌐 Live Showcase
-### https://your-gsap-portfolio.netlify.app/
+### https://gsap-portfolio.netlify.app/
 
 For project inquiries or code access, feel free to reach out!
 
