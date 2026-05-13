@@ -539,23 +539,41 @@
   .floating-img {
     position: absolute;
     border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
     z-index: 2;
+    /* Removed overflow: hidden so the glow can bleed out */
+    /* Removed the black box-shadow */
   }
 
-  .floating-img img {
+  /* The crisp, top image */
+  .floating-img .main-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 16px; 
+    position: relative;
+    z-index: 2; 
+  }
+
+  /* The colored, blurred reflection behind it */
+  .floating-img .reflect {
+    position: absolute;
+    top: 15px; /* Pushes the reflection slightly downwards */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+    filter: blur(25px); /* Creates the soft colored glow */
+    opacity: 0.85; /* Adjust this to make the glow brighter or softer */
+    z-index: 1; /* Puts it behind the main image */
+    transform: scale(0.95); /* Makes the glow slightly smaller than the main image */
   }
 
   /* Specific positions matching the screenshot */
-  .float-1 { top: 20%; left: 8%; width: 130px; height: 130px; border-radius: 24px; }
+  .float-1 { top: 20%; left: 8%; width: 130px; height: 130px; }
   .float-2 { bottom: 15%; left: 22%; width: 220px; height: 150px; }
   .float-3 { top: 25%; right: 8%; width: 120px; height: 120px; }
   .float-4 { bottom: 20%; right: 18%; width: 160px; height: 160px; }
-
   /* --- Centered Content --- */
   .cta-content-wrapper {
     position: relative;
