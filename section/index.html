@@ -151,7 +151,7 @@
   .left-content {
     position: absolute;
     bottom: 20px;
-    left: 15%; /* Safely inside the card */
+    left: 15%;
     z-index: 10;
     opacity: 0; 
   }
@@ -370,7 +370,7 @@
     display: flex;
     align-items: center; /* Centers image with the text block next to it */
     gap: 40px; /* Space between image and the meta block */
-    width: 60%; /* Gives the left side more room since tags moved here */
+    width: 60%; 
   }
 
   .main-image-wrapper {
@@ -1033,8 +1033,6 @@ updateCarousel(0);
 startAutoPlay();
 
 // *** SCOPED EVENT LISTENERS *** 
-// We only listen to the 'carousel' div now, NOT the whole section!
-
 carousel.addEventListener('mouseenter', () => {
   isHoveringPhotos = true;
   clearInterval(autoPlayTimer); // Stop auto-play when user engages
