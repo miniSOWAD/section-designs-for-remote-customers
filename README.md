@@ -28,7 +28,7 @@
   <br/>
 </div>
 
-For project inquiries or code access, feel free to reach out!
+For project inquiries or code access, feel free to reach out to me !
 
 ------------------------------------------------------------------------
 
