@@ -586,12 +586,22 @@
   }
 
   /* Eyebrow */
+  /* --- The Fixed Top Eyebrow & Line --- */
+  .cta-top-divider {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%); /* Magic trick to make it span the entire screen! */
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* The faint long grey line */
+    margin-bottom: 40px; /* Space between the line and the big heading */
+  }
+
   .cta-eyebrow-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 25px;
+    gap: 10px;
+    transform: translateY(1px); /* Pulls the green line exactly down onto the grey line */
   }
 
   .cta-eyebrow {
@@ -602,10 +612,10 @@
     text-transform: uppercase;
   }
 
-  .cta-line {
-    width: 150px;
+  .cta-green-line {
+    width: 100%; /* Perfectly matches the width of the text */
     height: 2px;
-    background: #444;
+    background: #c8ff00;
   }
 
   /* Main Heading */
@@ -633,22 +643,22 @@
     margin-bottom: 40px;
   }
 
-  /* Buttons */
+  /* --- Fixed Button Spacing --- */
   .cta-btn-wrapper {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 8px; /* FIXED: Reduced from 15px to bring them perfectly close */
   }
 
   .btn-green-pill {
     background: #c8ff00;
     color: #121212;
     border: none;
-    padding: 12px 35px;
+    padding: 12px 28px; /* Slightly tightened padding to look sharper */
     border-radius: 50px;
     font-family: 'DM Sans', sans-serif;
     font-weight: 800;
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: none;
     transition: transform 0.3s ease;
   }
@@ -657,14 +667,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 45px;
-    height: 45px;
+    width: 42px; /* Tweak to match screenshot proportions */
+    height: 42px;
     background: #ffffff;
     color: #121212;
     border: none;
     border-radius: 50%;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     cursor: none;
     transition: transform 0.3s ease;
   }
@@ -801,9 +811,11 @@
   <div class="cta-content-wrapper">
     
     <!-- Top Eyebrow -->
-    <div class="cta-eyebrow-wrapper">
-      <span class="cta-eyebrow">START YOUR PROJECT WITH US</span>
-      <div class="cta-line"></div>
+    <div class="cta-top-divider">
+      <div class="cta-eyebrow-wrapper">
+        <span class="cta-eyebrow">START YOUR PROJECT WITH US</span>
+        <div class="cta-green-line"></div>
+      </div>
     </div>
 
     <!-- Main Heading -->
