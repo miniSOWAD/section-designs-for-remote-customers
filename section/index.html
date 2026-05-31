@@ -9,6 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -507,6 +509,7 @@
     /* Initial state for GSAP Blur reveal */
     filter: blur(15px);
     opacity: 0;
+    will-change: filter, opacity;
   }
 
   /* --- Background Glows --- */
@@ -517,6 +520,7 @@
     opacity: 0.4;
     z-index: 0;
     pointer-events: none;
+    will-change: transform;
   }
 
   .glow-red {
@@ -540,6 +544,8 @@
     position: absolute;
     border-radius: 16px;
     z-index: 2;
+    will-change: transform, opacity;
+    transform-origin: center center;
     /* Removed overflow: hidden so the glow can bleed out */
     /* Removed the black box-shadow */
   }
@@ -629,8 +635,16 @@
   }
 
   /* GSAP Text Splitting classes */
-  .word-wrap-cta { display: inline-block; overflow: hidden; vertical-align: top; }
-  .word-cta { display: inline-block; transform: translateY(110%); }
+  .word-wrap-cta { 
+    display: inline-block; 
+    overflow: hidden; 
+    vertical-align: top; 
+  }
+  .word-cta { 
+    display: inline-block; 
+    transform: translateY(110%);
+    will-change: transform;
+  }
 
   /* Contact Info */
   .cta-contact-info {
@@ -661,6 +675,7 @@
     font-size: 0.95rem;
     cursor: none;
     transition: transform 0.3s ease;
+    will-change: transform, box-shadow;
   }
 
   .btn-white-circle {
@@ -677,6 +692,7 @@
     font-size: 1.1rem;
     cursor: none;
     transition: transform 0.3s ease;
+    will-change: transform, box-shadow;
   }
 
   .btn-green-pill:hover, .btn-white-circle:hover {
@@ -1163,101 +1179,151 @@ tlSection2.from(".sub-image-wrapper", { scale: 0.8, opacity: 0, duration: 0.8, s
 // --- Section 3: Call To Action Animations ---
 // --- Section 3: Call To Action Animations ---
 // --- Section 3: Call To Action Animations ---
-// 1. Split CTA Heading into words for the masked wave reveal
+gsap.registerPlugin(ScrollTrigger);
+
+// 1. Split CTA Heading into words for masked wave reveal
 const ctaHeading = document.getElementById('splitCtaHeading');
-if (ctaHeading) {
-  const ctaWords = ctaHeading.innerHTML.split('<br>').map(line => {
-    return line.split(' ').map(word => `<span class="word-wrap-cta"><span class="word-cta">${word}</span></span>`).join(' ');
-  }).join('<br>');
+
+if (ctaHeading && !ctaHeading.classList.contains("is-split")) {
+  const ctaWords = ctaHeading.innerHTML
+    .split('<br>')
+    .map(line => {
+      return line
+        .split(' ')
+        .map(word => `
+          <span class="word-wrap-cta">
+            <span class="word-cta">${word}</span>
+          </span>
+        `)
+        .join(' ');
+    })
+    .join('<br>');
+
   ctaHeading.innerHTML = ctaWords;
+  ctaHeading.classList.add("is-split");
 }
 
-// 2. Main ScrollTrigger Timeline for Section 3
+// 2. Initial states
+gsap.set(".cta-section", {
+  filter: "blur(15px)",
+  opacity: 0
+});
+
+gsap.set(".word-cta", {
+  y: "110%"
+});
+
+gsap.set(".floating-img", {
+  scale: 0,
+  opacity: 0,
+  rotation: () => gsap.utils.random(-15, 15)
+});
+
+// 3. Main CTA Timeline
 const tlCta = gsap.timeline({
   scrollTrigger: {
     trigger: "#ctaSection",
-    start: "top 65%", // Triggers nicely as it enters the screen
+    start: "top 65%",
     toggleActions: "play none none reverse"
   }
 });
 
-// A. Smooth fade-in & blur reduction for the whole section
+// A. Whole section fade + blur reveal
 tlCta.to(".cta-section", {
   filter: "blur(0px)",
   opacity: 1,
-  duration: 1.5,
+  duration: 1.4,
   ease: "power2.out"
 }, 0);
 
-// B. Eyebrow text drops in
-tlCta.from(".cta-eyebrow-wrapper", {
-  y: -20,
-  opacity: 0,
-  duration: 0.8,
-  ease: "power3.out"
-}, 0.3);
+// B. Eyebrow reveal
+tlCta.fromTo(".cta-eyebrow-wrapper",
+  {
+    y: -20,
+    opacity: 0
+  },
+  {
+    y: 0,
+    opacity: 1,
+    duration: 0.8,
+    ease: "power3.out"
+  },
+  0.25
+);
 
-// C. Strong Stagger Word Wave for the Main Heading
+// C. Strong stagger heading reveal
 tlCta.to(".word-cta", {
   y: "0%",
   duration: 0.9,
   stagger: 0.08,
   ease: "expo.out"
-}, 0.5);
+}, 0.45);
 
-// D. Contact Info fade up
-tlCta.from(".cta-contact-info span", {
-  y: 20,
-  opacity: 0,
-  duration: 0.8,
-  stagger: 0.1,
-  ease: "power2.out"
-}, 0.8);
+// D. Contact info reveal
+tlCta.fromTo(".cta-contact-info span",
+  {
+    y: 20,
+    opacity: 0
+  },
+  {
+    y: 0,
+    opacity: 1,
+    duration: 0.75,
+    stagger: 0.1,
+    ease: "power2.out"
+  },
+  0.8
+);
 
-// E. Buttons bounce in
-tlCta.from(".btn-green-pill, .btn-white-circle", {
-  scale: 0.5,
-  opacity: 0,
-  duration: 0.8,
-  stagger: 0.1,
-  ease: "back.out(1.8)"
-}, 1.0);
+// E. Button bounce reveal
+tlCta.fromTo(".btn-green-pill, .btn-white-circle",
+  {
+    scale: 0.5,
+    opacity: 0
+  },
+  {
+    scale: 1,
+    opacity: 1,
+    duration: 0.75,
+    stagger: 0.1,
+    ease: "back.out(1.8)"
+  },
+  1.0
+);
 
-// F. Floating Images pop in organically
-tlCta.from(".floating-img", 
+// F. Floating images organic pop-in
+tlCta.fromTo(".floating-img",
   {
     scale: 0,
     opacity: 0,
     rotation: () => gsap.utils.random(-15, 15)
-  }, // Slight random starting tilt
+  },
   {
     scale: 1,
-    opacity: 1, // Forces it to become fully visible!
+    opacity: 1,
     rotation: 0,
     duration: 1,
     stagger: 0.15,
     ease: "back.out(1.5)"
-  }, 
+  },
   0.7
 );
 
-// 3. Continuous Parallax & Floating Loops (Runs independently)
-
-// A. Floating Images Bobbing up and down
+// 4. Continuous floating image motion
 gsap.utils.toArray(".floating-img").forEach((img, i) => {
   gsap.to(img, {
-    y: () => gsap.utils.random(-25, 25), // Random vertical float distance
-    x: () => gsap.utils.random(-10, 10), // Slight horizontal drift
-    rotation: () => gsap.utils.random(-5, 5), // Very subtle rotation shift
-    duration: () => gsap.utils.random(3, 6), // Randomized speed for organic feel
+    y: () => gsap.utils.random(-25, 25),
+    x: () => gsap.utils.random(-10, 10),
+    rotation: () => gsap.utils.random(-5, 5),
+    duration: () => gsap.utils.random(3, 6),
     ease: "sine.inOut",
     yoyo: true,
     repeat: -1,
-    delay: i * 0.2 // Stagger the start times
+    delay: 1.6 + i * 0.2
   });
 });
 
-// B. Background Glow breathing/moving effect
+// 5. Background glow breathing movement
 gsap.to(".glow-red", {
   x: 50,
   y: 50,
@@ -1279,15 +1345,48 @@ gsap.to(".glow-purple", {
   delay: 2
 });
 
-// Cursor Hover effects for new CTA buttons
+// 6. CTA button custom cursor hover
 document.querySelectorAll('.btn-green-pill, .btn-white-circle').forEach(btn => {
   btn.addEventListener('mouseenter', () => {
-    gsap.to(ring, { width: 50, height: 50, borderColor: '#c8ff00', duration: 0.3 });
-    gsap.to(dot, { backgroundColor: '#c8ff00', duration: 0.2 });
+    gsap.to(btn, {
+      scale: 1.08,
+      boxShadow: "0 0 35px rgba(200, 255, 0, 0.35)",
+      duration: 0.3,
+      ease: "power2.out"
+    });
+
+    gsap.to(ring, {
+      width: 50,
+      height: 50,
+      borderColor: '#c8ff00',
+      duration: 0.3
+    });
+
+    gsap.to(dot, {
+      backgroundColor: '#c8ff00',
+      duration: 0.2
+    });
   });
+
   btn.addEventListener('mouseleave', () => {
-    gsap.to(ring, { width: 36, height: 36, borderColor: 'rgba(255,255,255,0.4)', duration: 0.3 });
-    gsap.to(dot, { backgroundColor: '#fff', duration: 0.2 });
+    gsap.to(btn, {
+      scale: 1,
+      boxShadow: "0 0 0 rgba(200, 255, 0, 0)",
+      duration: 0.3,
+      ease: "power2.out"
+    });
+
+    gsap.to(ring, {
+      width: 36,
+      height: 36,
+      borderColor: 'rgba(255,255,255,0.4)',
+      duration: 0.3
+    });
+
+    gsap.to(dot, {
+      backgroundColor: '#fff',
+      duration: 0.2
+    });
   });
 });
 
@@ -1317,5 +1416,6 @@ document.querySelectorAll('.btn-primary, .btn-outline').forEach(btn => {
   });
 });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </body>
 </html>
